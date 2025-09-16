@@ -99,6 +99,7 @@ static uintptr_t mcall_shutdown()
 static uintptr_t mcall_set_timer(uint64_t when)
 {
   *HLS()->timecmp = when;
+  mb();
   clear_csr(mip, MIP_STIP);
   set_csr(mie, MIP_MTIP);
   return 0;
